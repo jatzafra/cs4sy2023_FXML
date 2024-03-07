@@ -35,5 +35,21 @@ public class Subject {
     public static ArrayList<Subject> getSubjectList(){
         return subjectList;
     }
+    public static Subject searchSubject(String n) throws NullPointerException{
+        for(Subject subj : subjectList){
+            if(n.equals(subj.getName())){
+                return subj;
+            }
+        }
+        
+        throw new NullPointerException();
+    }
+    public int getSubjectIndex() throws NullPointerException{
+        int i = subjectList.indexOf(this);
+        if(i < 0){
+            throw new NullPointerException();
+        }
+        return i;
+    }
     
 }
