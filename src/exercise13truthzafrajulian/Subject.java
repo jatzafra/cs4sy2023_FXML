@@ -1,6 +1,6 @@
 package exercise13truthzafrajulian;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Subject {
     private String name, imgFileName;
@@ -32,24 +32,24 @@ public class Subject {
     public void setGrade(double grade) {
         grade = grade;
     }
-    public static ArrayList<Subject> getSubjectList(){
-        return subjectList;
+    public static int getListLength() {
+        return subjectList.size();
     }
-    public static Subject searchSubject(String n) throws NullPointerException{
-        for(Subject subj : subjectList){
-            if(n.equals(subj.getName())){
-                return subj;
-            }
+    public static int getSubjectIndex(Subject s) throws NullPointerException {
+        if(subjectList.contains(s)) return subjectList.indexOf(s);
+        else throw new NullPointerException();
+    }
+    public static int getSubjectIndex(String s) throws NullPointerException {
+        if(subjectList.contains(searchSubject(s))) return subjectList.indexOf(searchSubject(s));
+        else throw new NullPointerException();
+    }
+    public static Subject searchSubject(String search) throws NullPointerException {
+        for(Subject s : subjectList){
+            if(s.getName().equalsIgnoreCase(search)) return s;
         }
-        
         throw new NullPointerException();
     }
-    public int getSubjectIndex() throws NullPointerException{
-        int i = subjectList.indexOf(this);
-        if(i < 0){
-            throw new NullPointerException();
-        }
-        return i;
+    public static Subject searchSubject(int index) throws IndexOutOfBoundsException {
+        return subjectList.get(index);
     }
-    
 }

@@ -44,14 +44,14 @@ public class InitialScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         index = 0;
-        displayedSubject = Subject.getSubjectList().get(index);
+        displayedSubject = Subject.searchSubject(index);
         
         update();
     }    
     public void update(){
         nextButton.setDisable(false);
         prevButton.setDisable(false);
-        if(index == Subject.getSubjectList().size()-1){
+        if(index == Subject.getListLength() - 1){
             nextButton.setDisable(true);
         }
         if(index == 0){
@@ -71,7 +71,7 @@ public class InitialScreenController implements Initializable {
         
         try{
             displayedSubject = Subject.searchSubject(searched);
-            index = displayedSubject.getSubjectIndex();
+            index = Subject.getSubjectIndex(displayedSubject);
             update();
         }
         catch (NullPointerException e){
@@ -79,12 +79,14 @@ public class InitialScreenController implements Initializable {
         }
     }
     @FXML private void nextSubject(){
-        displayedSubject = Subject.getSubjectList().get(++index);
+        index++;
+        displayedSubject = Subject.searchSubject(index);
         
         update();
     }
     @FXML private void prevSubject(){
-        displayedSubject = Subject.getSubjectList().get(--index);
+        index--;
+        displayedSubject = Subject.searchSubject(index);
         
         update();
     }
